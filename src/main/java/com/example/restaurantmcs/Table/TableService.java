@@ -23,9 +23,7 @@ public class TableService {
     }
 
     public void createTable(RestaurantTable restaurantTable) {
-        Optional<RestaurantTable> tableByNumber = tableRepository.findTableByTableNumberAndRestaurantId(restaurantTable.getTableNumber(), restaurantTable.getRestaurantId());
-        if (tableByNumber.isPresent())
-            throw new EntityExistsException("Number already taken for that restaurant!");
+        Optional<RestaurantTable> tableByNumber = tableRepository.findTableByTableNumber(restaurantTable.getTableNumber());
         tableRepository.save(restaurantTable);
     }
 
@@ -69,7 +67,7 @@ public class TableService {
         throw new IllegalStateException("Could not find any table with id " + id);
     }
 
-    public Optional<RestaurantTable> getTableByNumber(Integer restaurantId, Integer tableNumber) {
-        return tableRepository.findTableByTableNumberAndRestaurantId(tableNumber, restaurantId);
+    public Optional<RestaurantTable> getTable(Integer id) {
+        return tableRepository.findById(id);
     }
 }

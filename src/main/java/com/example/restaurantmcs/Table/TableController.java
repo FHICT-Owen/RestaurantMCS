@@ -18,17 +18,18 @@ public class TableController {
     @Autowired
     public TableController(TableService tableService) { this.tableService = tableService; }
 
-    @GetMapping("/{tableNumber}")
-    public Optional<RestaurantTable> getTableByNumber(@RequestParam Integer restaurantId, @PathVariable("tableNumber") Integer tableNumber) {
-        System.out.println(restaurantId);
-        System.out.println(tableNumber);
-        return tableService.getTableByNumber(restaurantId, tableNumber); }
+    @GetMapping("/{tableId}")
+    public Optional<RestaurantTable> getTable(@PathVariable("tableId") Integer tableId) {
+        return tableService.getTable(tableId); }
 
-    @GetMapping
-    public List<RestaurantTable> getTablesByRestaurantId(@RequestParam Integer id) { return tableService.getTablesByRestaurantId(id); }
+    @GetMapping("/tables/{restaurantId}")
+    public List<RestaurantTable> getTables(@PathVariable("restaurantId") Integer id) { return tableService.getTablesByRestaurantId(id); }
 
     @PostMapping
-    public void createTable(@RequestBody RestaurantTable restaurantTable) { tableService.createTable(restaurantTable); }
+    public ResponseEntity<RestaurantTable> createTable(@RequestBody RestaurantTable restaurantTable) {
+        tableService.createTable(restaurantTable);
+        return new ResponseEntity<>(restaurantTable, HttpStatus.CREATED);
+    }
 
     @PutMapping("/{tableId}/update")
     public ResponseEntity<RestaurantTable> updateTable(@RequestBody RestaurantTable restaurantTable, @PathVariable("tableId") Integer id) {
