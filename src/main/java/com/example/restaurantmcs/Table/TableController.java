@@ -40,7 +40,7 @@ public class TableController {
     }
 
     @PutMapping("/{tableId}/activity")
-    public ResponseEntity<RestaurantTable> setActiveTable(@RequestBody Boolean state, @PathVariable("tableId") Integer id) {
+    public ResponseEntity<RestaurantTable> setActiveTable(@RequestParam Boolean state, @PathVariable("tableId") Integer id) {
         boolean success = tableService.setActive(id, state);
         if (success)
             return new ResponseEntity<>(HttpStatus.OK);
@@ -48,7 +48,7 @@ public class TableController {
     }
 
     @PutMapping("/{tableId}/use")
-    public ResponseEntity<RestaurantTable> setInUseTable(@RequestBody Boolean state, @PathVariable("tableId") Integer id) {
+    public ResponseEntity<RestaurantTable> setInUseTable(@RequestParam Boolean state, @PathVariable("tableId") Integer id) {
         boolean success = tableService.setInUse(id, state);
         if (success)
             return new ResponseEntity<>(HttpStatus.OK);
