@@ -1,9 +1,16 @@
 package com.example.restaurantmcs.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestaurantTable {
     @Id
     @SequenceGenerator(
@@ -20,55 +27,4 @@ public class RestaurantTable {
     private Integer restaurantId;
     private Boolean isActive;
     private Boolean inUse;
-
-    public RestaurantTable() {
-    }
-
-    public RestaurantTable(Integer id, Integer tableNumber, Integer restaurantId, Boolean isActive, Boolean inUse) {
-        this.id = id;
-        this.tableNumber = tableNumber;
-        this.restaurantId = restaurantId;
-        this.isActive = isActive;
-        this.inUse = inUse;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(Integer tableNumber) {
-        this.tableNumber = tableNumber;
-    }
-
-    public Integer getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public Boolean getInUse() {
-        return inUse;
-    }
-
-    public void setInUse(Boolean inUse) {
-        this.inUse = inUse;
-    }
 }
