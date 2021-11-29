@@ -17,7 +17,7 @@ public class IngredientController {
     }
 
     @GetMapping
-    public List<Ingredient> getDishes() {
+    public List<Ingredient> getIngredients() {
         return ingredientService.getIngredients();
     }
 
