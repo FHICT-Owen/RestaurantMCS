@@ -1,9 +1,16 @@
 package com.example.restaurantmcs.Ingredients;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Ingredient {
     @Id
     @SequenceGenerator(
@@ -18,30 +25,4 @@ public class Ingredient {
     private Integer id;
     private String name;
     private Boolean isAllergen;
-
-    public Ingredient() { }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getIsAllergen() {
-        return isAllergen;
-    }
-
-    public void setIsAllergen(Boolean isAllergen) {
-        this.isAllergen = isAllergen;
-    }
 }
