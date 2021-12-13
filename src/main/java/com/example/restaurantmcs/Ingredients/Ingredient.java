@@ -23,6 +23,8 @@ public class Ingredient {
             generator = "ingredient_sequence"
     )
     private Integer id;
+    private Integer restaurantId;
     private String name;
     private Boolean isAllergen;
+    private Boolean inStock;
 }
