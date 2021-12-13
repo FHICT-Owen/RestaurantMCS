@@ -24,5 +24,6 @@ public class Ingredient {
     )
     private Integer id;
     private String name;
+    private String name_NL;
     private Boolean isAllergen;
 }

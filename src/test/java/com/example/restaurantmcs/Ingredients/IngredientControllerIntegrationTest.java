@@ -30,8 +30,8 @@ class IngredientControllerIntegrationTest {
 
     @Test
     void shouldReturnIngredients() throws Exception {
-        Ingredient ingredient1 = new Ingredient(1, "Paprika", true);
-        Ingredient ingredient2 = new Ingredient(2, "Oregano", false);
+        Ingredient ingredient1 = new Ingredient(1, "Paprika", "Paprika", true);
+        Ingredient ingredient2 = new Ingredient(2, "Oregano", "Oregano", false);
 
         List<Ingredient> ingredientList = new ArrayList<>();
         ingredientList.add(ingredient1);
@@ -45,7 +45,7 @@ class IngredientControllerIntegrationTest {
 
     @Test
     void shouldAddNewIngredient() throws Exception {
-        Ingredient ingredient = new Ingredient(1, "Paprika", true);
+        Ingredient ingredient = new Ingredient(1, "Paprika", "Paprika", true);
 
         mockMvc.perform(post("/api/v1/ingredient")
                         .contentType(MediaType.APPLICATION_JSON)
