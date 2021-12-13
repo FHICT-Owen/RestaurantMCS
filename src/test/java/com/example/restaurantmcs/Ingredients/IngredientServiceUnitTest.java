@@ -39,7 +39,7 @@ class IngredientServiceUnitTest {
 
     @Test
     void createIngredient() {
-        Ingredient ingredient = new Ingredient(1, 1,"Paprika", true, true);
+        Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika",true, true);
 
 
         underTest.createIngredient(ingredient);
@@ -58,7 +58,7 @@ class IngredientServiceUnitTest {
     @Test
     void willThrowWhenIngredientNameIsTakenOnCreate() {
         // given
-        Ingredient ingredient = new Ingredient(1, 1,"Paprika", true, true);
+        Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika",true, true);
 
 
         given(ingredientRepository.findIngredientByName(anyString()))
