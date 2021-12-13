@@ -1,5 +1,6 @@
 package com.example.restaurantmcs.Ingredients;
 
+import com.example.restaurantmcs.Restaurant.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,20 @@ public class IngredientService {
             throw new EntityExistsException("Ingredient already exist!");
         }
         ingredientRepository.save(ingredient);
+    }
+
+    public boolean updateIngredient(Integer id, Ingredient ingredient) {
+        Optional<Ingredient> optionalIngredient = ingredientRepository.findById(id);
+        if(optionalIngredient.isPresent()) {
+            Ingredient actualIngredient = optionalIngredient.get();
+            actualIngredient.setName(ingredient.getName());
+            actualIngredient.setName_NL(ingredient.getName_NL());
+            actualIngredient.setIsAllergen(ingredient.getIsAllergen());
+            actualIngredient.setIsInStock(ingredient.getIsInStock());
+            ingredientRepository.save(actualIngredient);
+            return true;
+        }
+        return false;
     }
 
     public void removeIngredient(Integer id) {

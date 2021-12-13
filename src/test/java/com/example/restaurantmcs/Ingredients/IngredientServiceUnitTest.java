@@ -41,7 +41,6 @@ class IngredientServiceUnitTest {
     void createIngredient() {
         Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika",true, true);
 
-
         underTest.createIngredient(ingredient);
 
         ArgumentCaptor<Ingredient> dishArgumentCaptor =
@@ -59,7 +58,6 @@ class IngredientServiceUnitTest {
     void willThrowWhenIngredientNameIsTakenOnCreate() {
         // given
         Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika",true, true);
-
 
         given(ingredientRepository.findIngredientByName(anyString()))
                 .willReturn(java.util.Optional.of(ingredient));

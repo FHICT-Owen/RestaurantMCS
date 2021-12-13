@@ -45,8 +45,7 @@ class IngredientControllerIntegrationTest {
 
     @Test
     void shouldAddNewIngredient() throws Exception {
-            Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika", true, false);
-
+        Ingredient ingredient = new Ingredient(1, 1,"Paprika", "Paprika", true, false);
 
         mockMvc.perform(post("/api/v1/ingredient")
                         .contentType(MediaType.APPLICATION_JSON)

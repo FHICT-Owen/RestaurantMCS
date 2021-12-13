@@ -27,5 +27,5 @@ public class Ingredient {
     private String name;
     private String name_NL;
     private Boolean isAllergen;
-    private Boolean inStock;
+    private Boolean isInStock;
 }
