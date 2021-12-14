@@ -33,6 +33,17 @@ public class RestaurantService {
         return false;
     }
 
+    public void removeRestaurant(Integer id) {
+        boolean exists = restaurantRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("Restaurant with id " + id + " does not exist!");
+        }
+        exists = restaurantRepository.existsById(id);
+        System.out.println("this does not " + exists);
+
+        restaurantRepository.deleteRestaurantById(id);
+    }
+
     public List<Restaurant> getRestaurants() { return restaurantRepository.findAll(); }
 
     public Optional<Restaurant> getRestaurantByName(String name) { return restaurantRepository.findRestaurantByName(name); }

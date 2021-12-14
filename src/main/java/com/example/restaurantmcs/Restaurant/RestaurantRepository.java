@@ -8,4 +8,6 @@ import java.util.Optional;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
     Optional<Restaurant> findRestaurantByName(String name);
+    void deleteRestaurantById(Integer id);
+
 }
