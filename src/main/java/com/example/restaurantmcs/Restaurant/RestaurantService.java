@@ -2,11 +2,13 @@ package com.example.restaurantmcs.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class RestaurantService {
 
@@ -35,13 +37,12 @@ public class RestaurantService {
 
     public void removeRestaurant(Integer id) {
         boolean exists = restaurantRepository.existsById(id);
+         
         if (!exists) {
             throw new IllegalStateException("Restaurant with id " + id + " does not exist!");
-        }
-        exists = restaurantRepository.existsById(id);
-        System.out.println("this does not " + exists);
-
+        } 
         restaurantRepository.deleteRestaurantById(id);
+        System.out.println("this restaurant exists: " + exists);
     }
 
     public List<Restaurant> getRestaurants() { return restaurantRepository.findAll(); }
