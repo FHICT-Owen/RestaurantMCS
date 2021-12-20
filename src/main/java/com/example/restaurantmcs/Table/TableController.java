@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,14 @@ public class TableController {
     @PutMapping("/{tableId}/use")
     public ResponseEntity<RestaurantTable> setInUseTable(@RequestParam Boolean state, @PathVariable("tableId") Integer id) {
         boolean success = tableService.setInUse(id, state);
+        if (success)
+            return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{tableId}")
+    public ResponseEntity<RestaurantTable> removeTable(@PathVariable("tableId") Integer id) {
+        boolean success = tableService.removeTable(id);
         if (success)
             return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

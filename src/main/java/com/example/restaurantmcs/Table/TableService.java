@@ -67,6 +67,19 @@ public class TableService {
         throw new IllegalStateException("Could not find any table with id " + id);
     }
 
+    public boolean removeTable(Integer id) {
+        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
+        if(optionalTable.isPresent()) {
+            if (!optionalTable.get().getInUse()) {
+                RestaurantTable actualRestaurantTable = optionalTable.get();
+                tableRepository.delete(actualRestaurantTable);
+                return true;
+            }
+            throw new IllegalStateException("Table is being used!");
+        }
+        throw new IllegalStateException("Could not find any table with id " + id);
+    }
+
     public Optional<RestaurantTable> getTable(Integer id) {
         return tableRepository.findById(id);
     }
