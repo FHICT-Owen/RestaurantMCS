@@ -1,5 +1,6 @@
 package com.example.restaurantmcs.Table;
 
+import com.example.restaurantmcs.Restaurant.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,41 +31,13 @@ public class TableService {
     public boolean updateTable(Integer id, RestaurantTable restaurantTable) {
         Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
         if(optionalTable.isPresent()) {
-            if (!optionalTable.get().getInUse()) {
-                RestaurantTable actualRestaurantTable = optionalTable.get();
-                actualRestaurantTable.setTableNumber(restaurantTable.getTableNumber());
-                actualRestaurantTable.setIsActive(false);
-                tableRepository.save(actualRestaurantTable);
-                return true;
-            }
-            throw new IllegalStateException("Table is being used!");
-        }
-        throw new IllegalStateException("Could not find any table with id " + id);
-    }
-
-    public boolean setActive (Integer id, Boolean state) {
-        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-        if(optionalTable.isPresent()) {
-            if (!optionalTable.get().getInUse()) {
-                RestaurantTable actualRestaurantTable = optionalTable.get();
-                actualRestaurantTable.setIsActive(state);
-                tableRepository.save(actualRestaurantTable);
-                return true;
-            }
-            throw new IllegalStateException("Table is being used!");
-        }
-        throw new IllegalStateException("Could not find any table with id " + id);
-    }
-
-    public boolean setInUse (Integer id, Boolean state) {
-        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-        if(optionalTable.isPresent()) {
-            RestaurantTable actualRestaurantTable = optionalTable.get();
-            actualRestaurantTable.setInUse(state);
-            tableRepository.save(actualRestaurantTable);
+            RestaurantTable table = optionalTable.get();
+            table.setIsActive(restaurantTable.getIsActive());
+            table.setInUse(restaurantTable.getInUse());
+            tableRepository.save(table);
             return true;
         }
-        throw new IllegalStateException("Could not find any table with id " + id);
+        return false;
     }
 
     public boolean removeTable(Integer id) {
@@ -79,6 +52,45 @@ public class TableService {
         }
         throw new IllegalStateException("Could not find any table with id " + id);
     }
+//    public boolean updateTable(Integer id, RestaurantTable restaurantTable) {
+//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
+//        if(optionalTable.isPresent()) {
+//            if (!optionalTable.get().getInUse()) {
+//                RestaurantTable actualRestaurantTable = optionalTable.get();
+//                actualRestaurantTable.setTableNumber(restaurantTable.getTableNumber());
+//                actualRestaurantTable.setIsActive(false);
+//                tableRepository.save(actualRestaurantTable);
+//                return true;
+//            }
+//            throw new IllegalStateException("Table is being used!");
+//        }
+//        throw new IllegalStateException("Could not find any table with id " + id);
+//    }
+//
+//    public boolean setActive (Integer id, Boolean state) {
+//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
+//        if(optionalTable.isPresent()) {
+//            if (!optionalTable.get().getInUse()) {
+//                RestaurantTable actualRestaurantTable = optionalTable.get();
+//                actualRestaurantTable.setIsActive(state);
+//                tableRepository.save(actualRestaurantTable);
+//                return true;
+//            }
+//            throw new IllegalStateException("Table is being used!");
+//        }
+//        throw new IllegalStateException("Could not find any table with id " + id);
+//    }
+//
+//    public boolean setInUse (Integer id, Boolean state) {
+//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
+//        if(optionalTable.isPresent()) {
+//            RestaurantTable actualRestaurantTable = optionalTable.get();
+//            actualRestaurantTable.setInUse(state);
+//            tableRepository.save(actualRestaurantTable);
+//            return true;
+//        }
+//        throw new IllegalStateException("Could not find any table with id " + id);
+//    }
 
     public Optional<RestaurantTable> getTable(Integer id) {
         return tableRepository.findById(id);
