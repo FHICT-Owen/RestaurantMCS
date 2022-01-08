@@ -3,6 +3,7 @@ package com.example.restaurantmcs.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +25,11 @@ public class RestaurantController {
     public List<Restaurant> getRestaurants() { return restaurantService.getRestaurants(); }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('create:restaurant')")
     public void createRestaurant(@RequestBody Restaurant restaurant) { restaurantService.createRestaurant(restaurant); }
 
     @PutMapping("/{restaurantId}")
+    @PreAuthorize("hasAuthority('update:restaurant')")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant, @PathVariable("restaurantId") Integer id) {
         boolean success = restaurantService.updateRestaurant(id, restaurant);
         if (success)
@@ -35,6 +38,7 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('delete:restaurant')")
     public void deleteRestaurant(@PathVariable Integer id) {
         restaurantService.removeRestaurant(id);
     }
