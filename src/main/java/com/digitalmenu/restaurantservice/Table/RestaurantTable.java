@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -24,16 +25,16 @@ public class RestaurantTable {
             generator = "table_sequence"
     )
     private Integer id;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer tableNumber;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer restaurantId;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Boolean isActive;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Boolean inUse;
 }

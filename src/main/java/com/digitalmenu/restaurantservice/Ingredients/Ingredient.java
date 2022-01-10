@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -24,7 +25,7 @@ public class Ingredient {
             generator = "ingredient_sequence"
     )
     private Integer id;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer restaurantId;
     @NotBlank
@@ -33,10 +34,10 @@ public class Ingredient {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String name_NL;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Boolean isAllergen;
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Boolean isInStock;
 }
