@@ -6,6 +6,7 @@ import com.digitalmenu.restaurantservice.exception.table.TableInUseException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -50,6 +51,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Object> handleTableInUseException(TableInUseException tableInUseException) {
         return buildErrorResponse(tableInUseException, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleAccessDeniedException() {
+        return buildErrorResponse("Access denied", HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(Exception.class)
