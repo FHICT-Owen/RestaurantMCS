@@ -26,16 +26,14 @@ public class RestaurantService {
     }
 
     public Restaurant updateRestaurant(Restaurant restaurant) {
-        var foundRestaurant = restaurantRepository.findById(restaurant.getId())
-                .orElseThrow(() -> new NoSuchElementFoundException("Restaurant not found"));
-        foundRestaurant.setName(restaurant.getName());
-        return restaurantRepository.save(foundRestaurant);
+        if (!restaurantRepository.existsById(restaurant.getId()))
+            throw new NoSuchElementFoundException("Restaurant not found");
+        return restaurantRepository.save(restaurant);
     }
 
     public void deleteRestaurant(Integer id) {
         if (!restaurantRepository.existsById(id))
             throw new NoSuchElementFoundException("Restaurant not found");
-
         restaurantRepository.deleteById(id);
     }
 }

@@ -24,19 +24,19 @@ public class RestaurantController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('create:restaurant')")
+//    @PreAuthorize("hasAuthority('create:restaurant')")
     public ResponseEntity<Restaurant> createRestaurant(@RequestBody @Valid Restaurant restaurant) {
         return new ResponseEntity<>(restaurantService.createRestaurant(restaurant), HttpStatus.CREATED);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('update:restaurant')")
+//    @PreAuthorize("hasAuthority('update:restaurant')")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody @Valid Restaurant restaurant) {
         return new ResponseEntity<>(restaurantService.updateRestaurant(restaurant), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('delete:restaurant')")
+//    @PreAuthorize("hasAuthority('delete:restaurant')")
     public void deleteRestaurant(@PathVariable Integer id) {
         restaurantService.deleteRestaurant(id);
     }
