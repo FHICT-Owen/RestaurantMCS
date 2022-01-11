@@ -23,19 +23,19 @@ public class IngredientController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('create:ingredient')")
+//    @PreAuthorize("hasAuthority('create:ingredient')")
     public ResponseEntity<Ingredient> createCategory(@RequestBody @Valid Ingredient ingredient) {
         return new ResponseEntity<>(ingredientService.createIngredient(ingredient), HttpStatus.CREATED);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('update:ingredient')")
+//    @PreAuthorize("hasAuthority('update:ingredient')")
     public ResponseEntity<Ingredient> updateCategory(@RequestBody @Valid Ingredient ingredient) {
         return new ResponseEntity<>(ingredientService.updateIngredient(ingredient), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('delete:ingredient')")
+//    @PreAuthorize("hasAuthority('delete:ingredient')")
     public void deleteIngredient(@PathVariable Integer id) {
         ingredientService.removeIngredient(id);
     }

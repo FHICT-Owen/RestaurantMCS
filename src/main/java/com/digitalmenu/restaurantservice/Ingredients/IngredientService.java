@@ -26,15 +26,9 @@ public class IngredientService {
     }
 
     public Ingredient updateIngredient(Ingredient ingredient) {
-        var foundIngredient = ingredientRepository.findById(ingredient.getId())
-                .orElseThrow(() -> new NoSuchElementFoundException("Ingredient not found"));
-
-        foundIngredient.setName(ingredient.getName());
-        foundIngredient.setName_NL(ingredient.getName_NL());
-        foundIngredient.setIsAllergen(ingredient.getIsAllergen());
-        foundIngredient.setIsInStock(ingredient.getIsInStock());
-
-        return ingredientRepository.save(foundIngredient);
+        if (!ingredientRepository.existsById(ingredient.getId()))
+            throw new NoSuchElementFoundException("Restaurant not found");
+        return ingredientRepository.save(ingredient);
     }
 
     public void removeIngredient(Integer id) {
