@@ -39,6 +39,7 @@ public class TableService {
     public void updateTable(RestaurantTable table) {
         if (!tableRepository.existsById(table.getId()))
             throw new NoSuchElementFoundException("Table not found");
+        table.setInUse(false);
         tableRepository.save(table);
     }
 
