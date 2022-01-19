@@ -25,10 +25,10 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Restaurant restaurant) {
+    public void updateRestaurant(Restaurant restaurant) {
         if (!restaurantRepository.existsById(restaurant.getId()))
             throw new NoSuchElementFoundException("Restaurant not found");
-        return restaurantRepository.save(restaurant);
+        restaurantRepository.save(restaurant);
     }
 
     public void deleteRestaurant(Integer id) {

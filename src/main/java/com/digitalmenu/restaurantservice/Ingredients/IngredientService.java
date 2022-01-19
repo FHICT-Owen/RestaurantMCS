@@ -25,10 +25,10 @@ public class IngredientService {
         return ingredientRepository.save(ingredient);
     }
 
-    public Ingredient updateIngredient(Ingredient ingredient) {
+    public void updateIngredient(Ingredient ingredient) {
         if (!ingredientRepository.existsById(ingredient.getId()))
             throw new NoSuchElementFoundException("Restaurant not found");
-        return ingredientRepository.save(ingredient);
+        ingredientRepository.save(ingredient);
     }
 
     public void removeIngredient(Integer id) {

@@ -31,7 +31,8 @@ public class IngredientController {
     @PutMapping
     @PreAuthorize("hasAuthority('access:inventory')")
     public ResponseEntity<Ingredient> updateCategory(@RequestBody @Valid Ingredient ingredient) {
-        return new ResponseEntity<>(ingredientService.updateIngredient(ingredient), HttpStatus.NO_CONTENT);
+        ingredientService.updateIngredient(ingredient);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")

@@ -29,32 +29,27 @@ public class TableController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('access:table')")
     public ResponseEntity<RestaurantTable> createTable(@RequestBody @Valid RestaurantTable restaurantTable) {
         return new ResponseEntity<>(tableService.createTable(restaurantTable), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<RestaurantTable> updateTable(@RequestBody @Valid RestaurantTable restaurantTable) {
-        return new ResponseEntity<>(tableService.updateTable(restaurantTable), HttpStatus.NO_CONTENT);
+    @PreAuthorize("hasAuthority('access:table')")
+    public ResponseEntity<RestaurantTable> updateTable(@RequestBody @Valid RestaurantTable table) {
+        tableService.updateTable(table);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{tableId}")
+    public ResponseEntity<RestaurantTable> setTableInUse(@PathVariable("tableId") Integer id) {
+        tableService.setTableInUse(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{tableId}")
+    @PreAuthorize("hasAuthority('access:table')")
     public void deleteTable(@PathVariable("tableId") Integer id) {
         tableService.deleteTable(id);
     }
-//    @PutMapping("/{tableId}/activity")
-//    public ResponseEntity<RestaurantTable> setActiveTable(@RequestParam Boolean state, @PathVariable("tableId") Integer id) {
-//        boolean success = tableService.setActive(id, state);
-//        if (success)
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
-//
-//    @PutMapping("/{tableId}/use")
-//    public ResponseEntity<RestaurantTable> setInUseTable(@RequestParam Boolean state, @PathVariable("tableId") Integer id) {
-//        boolean success = tableService.setInUse(id, state);
-//        if (success)
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
 }

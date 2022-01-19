@@ -23,17 +23,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/api/v1/table/**").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/v1/ingredient/**").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/v1/restaurant/**").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .oauth2ResourceServer()
-                .jwt()
-                .decoder(jwtDecoder())
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
+        http.csrf().disable();
+//                .authorizeRequests()
+//                .mvcMatchers(HttpMethod.GET, "/api/v1/table/**").permitAll()
+//                .mvcMatchers(HttpMethod.GET, "/api/v1/ingredient/**").permitAll()
+//                .mvcMatchers(HttpMethod.GET, "/api/v1/restaurant/**").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .oauth2ResourceServer()
+//                .jwt()
+//                .decoder(jwtDecoder())
+//                .jwtAuthenticationConverter(jwtAuthenticationConverter());
+//        http.csrf().disable().authorizeRequests()
+//                .mvcMatchers("api/v1/table/**").authenticated()
+//                .mvcMatchers("api/v1/restaurant").authenticated()
+//                .mvcMatchers("api/v1/order").authenticated()
+//                .anyRequest().permitAll()
+//                .and()
+//                .oauth2ResourceServer()
+//                .jwt()
+//                .decoder(jwtDecoder())
+//                .jwtAuthenticationConverter(jwtAuthenticationConverter());
     }
 
     JwtDecoder jwtDecoder() {
