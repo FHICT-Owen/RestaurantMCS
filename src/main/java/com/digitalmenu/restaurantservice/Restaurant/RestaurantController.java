@@ -32,7 +32,8 @@ public class RestaurantController {
     @PutMapping
     @PreAuthorize("hasAuthority('access:restaurant')")
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody @Valid Restaurant restaurant) {
-        return new ResponseEntity<>(restaurantService.updateRestaurant(restaurant), HttpStatus.NO_CONTENT);
+        restaurantService.updateRestaurant(restaurant);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")

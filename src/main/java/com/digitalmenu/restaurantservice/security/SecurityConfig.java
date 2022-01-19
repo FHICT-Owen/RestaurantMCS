@@ -23,11 +23,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/api/v1/ingredient/**").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/api/v1/restaurant/**").permitAll()
-                .anyRequest()
-                .authenticated()
+        http.csrf().disable().authorizeRequests()
+                .mvcMatchers("api/v1/table/**").authenticated()
+                .mvcMatchers(HttpMethod.POST, "api/v1/table").authenticated()
+                .mvcMatchers(HttpMethod.PUT, "api/v1/table").authenticated()
+                .mvcMatchers(HttpMethod.DELETE, "api/v1/table/**").authenticated()
+                .mvcMatchers(HttpMethod.POST, "api/v1/restaurant").authenticated()
+                .mvcMatchers(HttpMethod.PUT, "api/v1/restaurant").authenticated()
+                .mvcMatchers(HttpMethod.DELETE, "api/v1/restaurant/**").authenticated()
+                .mvcMatchers(HttpMethod.POST, "api/v1/ingredient").authenticated()
+                .mvcMatchers(HttpMethod.PUT, "api/v1/ingredient").authenticated()
+                .mvcMatchers(HttpMethod.DELETE, "api/v1/ingredient/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .oauth2ResourceServer()
                 .jwt()

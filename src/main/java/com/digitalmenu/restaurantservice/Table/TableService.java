@@ -36,12 +36,18 @@ public class TableService {
         return tableRepository.save(restaurantTable);
     }
 
-    public RestaurantTable updateTable(RestaurantTable restaurantTable) {
-        var foundRestaurantTable = tableRepository.findById(restaurantTable.getId())
+    public void updateTable(RestaurantTable table) {
+        if (!tableRepository.existsById(table.getId()))
+            throw new NoSuchElementFoundException("Table not found");
+        table.setInUse(false);
+        tableRepository.save(table);
+    }
+
+    public void setTableInUse(Integer id) {
+        var table = tableRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException("Table not found"));
-        foundRestaurantTable.setIsActive(restaurantTable.getIsActive());
-        foundRestaurantTable.setInUse(restaurantTable.getInUse());
-        return tableRepository.save(foundRestaurantTable);
+        table.setInUse(true);
+        tableRepository.save(table);
     }
 
     public void deleteTable(Integer id) {
@@ -52,56 +58,4 @@ public class TableService {
 
         tableRepository.deleteById(id);
     }
-
-//    public boolean removeTable(Integer id) {
-//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-//        if(optionalTable.isPresent()) {
-//            if (!optionalTable.get().getInUse()) {
-//                RestaurantTable actualRestaurantTable = optionalTable.get();
-//                tableRepository.delete(actualRestaurantTable);
-//                return true;
-//            }
-//            throw new IllegalStateException("Table is being used!");
-//        }
-//        throw new IllegalStateException("Could not find any table with id " + id);
-//    }
-//    public boolean updateTable(Integer id, RestaurantTable restaurantTable) {
-//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-//        if(optionalTable.isPresent()) {
-//            if (!optionalTable.get().getInUse()) {
-//                RestaurantTable actualRestaurantTable = optionalTable.get();
-//                actualRestaurantTable.setTableNumber(restaurantTable.getTableNumber());
-//                actualRestaurantTable.setIsActive(false);
-//                tableRepository.save(actualRestaurantTable);
-//                return true;
-//            }
-//            throw new IllegalStateException("Table is being used!");
-//        }
-//        throw new IllegalStateException("Could not find any table with id " + id);
-//    }
-//
-//    public boolean setActive (Integer id, Boolean state) {
-//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-//        if(optionalTable.isPresent()) {
-//            if (!optionalTable.get().getInUse()) {
-//                RestaurantTable actualRestaurantTable = optionalTable.get();
-//                actualRestaurantTable.setIsActive(state);
-//                tableRepository.save(actualRestaurantTable);
-//                return true;
-//            }
-//            throw new IllegalStateException("Table is being used!");
-//        }
-//        throw new IllegalStateException("Could not find any table with id " + id);
-//    }
-//
-//    public boolean setInUse (Integer id, Boolean state) {
-//        Optional<RestaurantTable> optionalTable = tableRepository.findById(id);
-//        if(optionalTable.isPresent()) {
-//            RestaurantTable actualRestaurantTable = optionalTable.get();
-//            actualRestaurantTable.setInUse(state);
-//            tableRepository.save(actualRestaurantTable);
-//            return true;
-//        }
-//        throw new IllegalStateException("Could not find any table with id " + id);
-//    }
 }
