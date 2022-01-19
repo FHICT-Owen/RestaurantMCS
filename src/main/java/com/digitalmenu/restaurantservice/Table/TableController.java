@@ -41,7 +41,7 @@ public class TableController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("inUse/{tableId}")
+    @PutMapping("inuse/{tableId}")
     public ResponseEntity<RestaurantTable> setTableInUse(@PathVariable("tableId") Integer id) {
         tableService.setTableInUse(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
